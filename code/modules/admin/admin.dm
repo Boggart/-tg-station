@@ -474,6 +474,9 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];secretsfun=whiteout'>Fix all lights</A><BR>
 			<A href='?src=\ref[src];secretsfun=floorlava'>The floor is lava! (DANGEROUS: extremely lame)</A><BR>
 			<BR>
+			<B>Mapping Secrets</B><BR>
+			<A href='?src=\ref[src];secretsmapping=savemap'>Save the current Z-level to a dmm</A><BR>
+			<BR>
 			"}
 
 /* DEATH SQUADS

@@ -53,6 +53,7 @@ dmm_suite{
 			for(var/pos_y=nw.y;pos_y>=se.y;pos_y--){
 				for(var/pos_x=nw.x;pos_x<=se.x;pos_x++){
 					var/turf/test_turf = locate(pos_x,pos_y,pos_z)
+					world << "MapSave: Dumping turf at: [pos_x], [pos_y], [pos_z]"
 					var/test_template = make_template(test_turf, flags)
 					var/template_number = templates.Find(test_template)
 					if(!template_number){
@@ -135,8 +136,15 @@ dmm_suite{
 			for(var/V in A.vars){
 				sleep(-1)
 				if((!issaved(A.vars[V])) || (A.vars[V]==initial(A.vars[V]))){continue}
+				//if ("[V]" == "info_links")	continue //skip ones that kill dreammaker's map loading
+
 				if(istext(A.vars[V])){
-					attributes_text += {"[V] = "[A.vars[V]]""}
+					var/txt = A.vars[V]
+					txt = replacetext(txt, "\\", "\\\\")
+					txt = replacetext(txt, "\"", "\\\"")
+					txt = replacetext(txt, "\n", "\\n")
+					txt = replacetext(txt, "\t", "\\t")
+					attributes_text += {"[V] = "[txt]""}
 					}
 				else if(isnum(A.vars[V])||ispath(A.vars[V])){
 					attributes_text += {"[V] = [A.vars[V]]"}

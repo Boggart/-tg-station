@@ -1902,6 +1902,25 @@
 			if (ok)
 				world << text("<B>A secret has been activated by []!</B>", usr.key)
 
+	else if(href_list["secretsmapping"])
+		if("savemap")
+			var/choice = input("Are you at a corner tile of the area you wish to save?") in list("Yes", "No")
+			if(choice == "No")
+				return
+			var/turf1 = get_turf(usr.loc)
+			choice = input("Are you at the other corner tile of the area you wish to save?") in list("Yes", "No")
+			if(choice == "No")
+				return
+			var/turf2 = get_turf(usr.loc)
+			var/destfilename = ""
+			destfilename = input(usr,"What do you wish to name the map? (Default: Export)","Name","Export") as text
+			if (destfilename == "")
+				world << "Mapsave aborted due to invalid name."
+				return
+			destfilename = "maps/[destfilename].dmm"
+			var/dmm_file = file(destfilename)
+			dmm_file << maploader.write_map(turf1, turf2, 16)
+
 	else if(href_list["secretsadmin"])
 		if(!check_rights(R_ADMIN))	return
 
