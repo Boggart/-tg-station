@@ -31,7 +31,7 @@ dmm_suite{
 		if(!isturf(t1) || !isturf(t2)){
 			CRASH("Invalid arguments supplied to proc save_map, arguments were not turfs.")
 			}
-		var/file_text = write_map(t1,t2,flags)
+		var/file_text = list2text(write_map(t1,t2,flags), "")
 		if(fexists("[map_name].dmm")){
 			fdel("[map_name].dmm")
 			}
@@ -47,8 +47,8 @@ dmm_suite{
 		var/turf/nw = locate(min(t1.x,t2.x),max(t1.y,t2.y),min(t1.z,t2.z))
 		var/turf/se = locate(max(t1.x,t2.x),min(t1.y,t2.y),max(t1.z,t2.z))
 		var/list/templates[0]
-		var/template_buffer = {""}
-		var/dmm_text = {""}
+		var/list/template_buffer[""]
+		var/list/dmm_text[""]
 		for(var/pos_z=nw.z;pos_z<=se.z;pos_z++){
 			for(var/pos_y=nw.y;pos_y>=se.y;pos_y--){
 				for(var/pos_x=nw.x;pos_x<=se.x;pos_x++){
