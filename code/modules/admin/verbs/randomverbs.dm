@@ -766,3 +766,47 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		usr << "Random events disabled"
 		message_admins("Admin [key_name_admin(usr)] has disabled random events.")
 	feedback_add_details("admin_verb","TRE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/admin_copy(atom/O as obj|mob|turf in world)
+	set category = "Admin"
+	set name = "Copy"
+	if (!holder)
+		src << "Only administrators may use this command."
+		return
+
+	del holder.pastebuffer
+	holder.pastebuffer = new /savefile()
+	holder.pastebuffer << O
+
+	feedback_add_details("admin_verb","CPY") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/admin_cut(atom/O as obj|mob|turf in world)
+	set category = "Admin"
+	set name = "Cut"
+	if (!holder)
+		src << "Only administrators may use this command."
+		return
+
+	del holder.pastebuffer
+	holder.pastebuffer = new /savefile()
+	holder.pastebuffer << O
+	qdel(O)
+
+	feedback_add_details("admin_verb","CUT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/admin_paste(turf/T as turf in world)
+	set category = "Admin"
+	set name = "Paste"
+	if (!holder)
+		src << "Only administrators may use this command."
+		return
+
+	var/atom/A = null
+	holder.pastebuffer >> A
+	if (isturf(A))
+		T = A
+	else
+		T.contents += A
+
+	message_admins("[key_name_admin(usr)] pasted [A] at ([A.x],[A.y],[A.z])")
+	feedback_add_details("admin_verb","PST") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

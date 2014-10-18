@@ -37,6 +37,8 @@ var/list/admin_verbs_admin = list(
 	/datum/admins/proc/view_atk_log,	/*shows the server combat-log, doesn't do anything presently*/
 	/client/proc/cmd_admin_subtle_message,	/*send an message to somebody as a 'voice in their head'*/
 	/client/proc/cmd_admin_delete,		/*delete an instance/object/mob/etc*/
+	/client/proc/admin_copy,			/*copys an obj/mob/turf*/
+	/client/proc/admin_paste,			/*pastes an obj/mob/turf*/
 	/client/proc/cmd_admin_check_contents,	/*displays the contents of an instance*/
 	/client/proc/check_antagonists,		/*shows all antags*/
 	/datum/admins/proc/access_news_network,	/*allows access of newscasters*/
