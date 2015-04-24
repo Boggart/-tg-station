@@ -242,7 +242,7 @@
 			src.attack_hand(user)
 
 /obj/structure/closet/proc/place(var/mob/user, var/obj/item/I)
-	if(!src.opened)
+	if(!src.opened && secure)
 		togglelock(user)
 		return 1
 	return 0
